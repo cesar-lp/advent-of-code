@@ -1,9 +1,10 @@
 use std::env;
-use std::fs;
 use std::io;
 use std::time::{Duration, Instant};
 
-use advent_of_code::{get_day, noop};
+use advent_of_code::{get, noop};
+
+mod y2015;
 
 fn fmt_time(ms: f64) -> String {
     if ms <= 1.0 {
@@ -37,9 +38,11 @@ fn main() {
     // Get day string
     let args: Vec<String> = env::args().collect();
     let mut day = String::new();
+    let mut year = String::new();
 
     if args.len() >= 2 {
-        day = args[1].clone();
+        year = args[1].clone();
+        day = args[2].clone();
     } else {
         println!("Enter day: ");
         io::stdin()
@@ -47,7 +50,7 @@ fn main() {
             .expect("Failed to read line");
     }
 
-    // Parse day as number
+    // Parse year, day as number
     day = day.trim().to_string();
     let day_num: u32 = match day.parse() {
         Ok(num) => num,
@@ -57,20 +60,23 @@ fn main() {
         }
     };
 
-    // Read input file
-    let cwd = env::current_dir().unwrap();
-    let filename = cwd.join("inputs").join(format!("day{:02}.txt", day_num));
-    println!("Reading {}", filename.display());
-    let input = fs::read_to_string(filename).expect("Error while reading");
+    year = year.trim().to_string();
+    let year_num: u32 = match year.parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Invalid year number: {}", year);
+            return;
+        }
+    };
 
     // Get corresponding function
-    let to_run = get_day(day_num);
+    let to_run = get(year_num, day_num);
 
     // Time it
     if to_run.0 != noop {
         println!("Running Part 1");
         let part1_start = Instant::now();
-        to_run.0(input.clone());
+        to_run.0();
         let part1_dur = part1_start.elapsed();
         println!("Took {}", fmt_dur(part1_dur));
     }
@@ -78,7 +84,7 @@ fn main() {
     if to_run.1 != noop {
         println!("Running Part 2");
         let part2_start = Instant::now();
-        to_run.1(input.clone());
+        to_run.1();
         let part2_dur = part2_start.elapsed();
         println!("Took {}", fmt_dur(part2_dur));
     }

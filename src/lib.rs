@@ -1,15 +1,20 @@
-// Days
-pub mod day01;
+mod y2015;
 
-pub fn noop(_inp: String) {}
+pub fn noop() {}
 
-pub type DayFn = fn(String);
+pub type DayFn = fn();
 
-pub fn get_day(day: u32) -> (DayFn, DayFn) {
-    return match day {
-        1 => (day01::part1, noop),
+pub fn get(year: u32, day: u32) -> (DayFn, DayFn) {
+    return match year {
+        2015 => match day {
+            1 => (y2015::day_01::run_part_one, y2015::day_01::run_part_two),
+            _ => {
+                println!("Unknown day: {}", day);
+                return (noop, noop);
+            }
+        },
         _ => {
-            println!("Unknown day: {}", day);
+            println!("Unknown year: {}", year);
             return (noop, noop);
         }
     };

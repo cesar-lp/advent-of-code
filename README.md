@@ -1,3 +1,6 @@
-# Advent of Code Rust Template
+# Advent of Code - Rust Edition
 
-Advent of Code Rust template from https://aoc-templates.util.repl.co/
+## How to run
+```shell script
+cargo run -- {year} {day}
+```
