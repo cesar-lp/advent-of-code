@@ -1,9 +1,9 @@
-use std::env;
-use std::io;
 use std::time::{Duration, Instant};
+use std::{env, fs, io};
 
-use advent_of_code::{get, noop};
+use exercise::DayExercise;
 
+mod exercise;
 mod y2015;
 
 fn fmt_time(ms: f64) -> String {
@@ -69,23 +69,28 @@ fn main() {
         }
     };
 
-    // Get corresponding function
-    let to_run = get(year_num, day_num);
+    let path = format!("src/y{}/day_{:0>2}/input.txt", year_num, day_num);
+    let input = fs::read_to_string(path).unwrap();
 
-    // Time it
-    if to_run.0 != noop {
+    let exercise = exercise::get(year_num, day_num);
+
+    if exercise.is_some() {
+        let exercise = exercise.unwrap();
+
         println!("Running Part 1");
-        let part1_start = Instant::now();
-        to_run.0();
-        let part1_dur = part1_start.elapsed();
-        println!("Took {}", fmt_dur(part1_dur));
-    }
 
-    if to_run.1 != noop {
+        let part1_start = Instant::now();
+        exercise.run_part_one(&input);
+        let part1_dur = part1_start.elapsed();
+
+        println!("Took {}", fmt_dur(part1_dur));
+
         println!("Running Part 2");
+
         let part2_start = Instant::now();
-        to_run.1();
+        exercise.run_part_two(&input);
         let part2_dur = part2_start.elapsed();
+
         println!("Took {}", fmt_dur(part2_dur));
     }
 }
