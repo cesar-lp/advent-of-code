@@ -70,7 +70,10 @@ fn main() {
     };
 
     let path = format!("src/y{}/day_{:0>2}/input.txt", year_num, day_num);
-    let input = fs::read_to_string(path).unwrap();
+    let mut input = fs::read_to_string(path).unwrap();
+
+    println!("{}", input.ends_with('\n'));
+    //trim_newline(&mut input);
 
     let exercise = exercise::get(year_num, day_num);
 
