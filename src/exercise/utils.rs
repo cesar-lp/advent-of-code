@@ -21,3 +21,7 @@ pub fn concatenate_str(s1: String, s2: String) -> String {
 
     format!("{}{}", s1, s2)
 }
+
+pub fn is_vowel(c: &char) -> bool {
+    c == &'a' || c == &'e' || c == &'i' || c == &'o' || c == &'u'
+}

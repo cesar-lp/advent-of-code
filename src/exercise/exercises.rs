@@ -9,6 +9,7 @@ pub fn get(year: u32, day: u32) -> Option<Box<dyn DayExercise>> {
             2 => Some(y2015::day_02::Runner::boxed()),
             3 => Some(y2015::day_03::Runner::boxed()),
             4 => Some(y2015::day_04::Runner::boxed()),
+            5 => Some(y2015::day_05::Runner::boxed()),
             _ => {
                 println!("Unknown day: {}", day);
                 None
