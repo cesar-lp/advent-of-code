@@ -1,8 +1,6 @@
 use std::time::{Duration, Instant};
 use std::{env, fs, io};
 
-use exercise::DayExercise;
-
 mod exercise;
 mod y2015;
 
