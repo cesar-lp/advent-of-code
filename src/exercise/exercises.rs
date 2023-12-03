@@ -1,6 +1,6 @@
 use crate::exercise::DayExercise;
 
-use crate::y2015;
+use crate::{y2015, y2023};
 
 pub fn get(year: u32, day: u32) -> Option<Box<dyn DayExercise>> {
     let day_exercise: Option<Box<dyn DayExercise>> = match year {
@@ -17,6 +17,14 @@ pub fn get(year: u32, day: u32) -> Option<Box<dyn DayExercise>> {
                 None
             }
         },
+
+        2023 => match day {
+            1 => Some(y2023::day_01::Runner::boxed()),
+            _ => {
+                println!("Unknown day: {}", day);
+                None
+            }
+        }
         _ => {
             println!("Unknown year: {}", year);
             None

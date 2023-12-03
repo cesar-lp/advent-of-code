@@ -3,6 +3,7 @@ use std::{env, fs, io};
 
 mod exercise;
 mod y2015;
+pub mod y2023;
 
 fn fmt_time(ms: f64) -> String {
     if ms <= 1.0 {
