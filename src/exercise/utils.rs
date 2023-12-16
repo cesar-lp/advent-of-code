@@ -25,3 +25,9 @@ pub fn concatenate_str(s1: String, s2: String) -> String {
 pub fn is_vowel(c: &char) -> bool {
     c == &'a' || c == &'e' || c == &'i' || c == &'o' || c == &'u'
 }
+
+pub fn concatenate(input: Vec<u32>) -> u64 {
+    return input
+        .iter()
+        .fold(0, |acc: u64, elem: &u32| acc * 10 + (*elem as u64));
+}
